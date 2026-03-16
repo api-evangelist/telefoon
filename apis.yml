@@ -3,7 +3,7 @@ description: APIs for Telefoon telecommunications services
 image: https://www.telefoon.com/logo.png
 url: https://www.telefoon.com
 created: '2024'
-modified: '2024'
+modified: '2026-03-16'
 apis:
 - name: Telefoon Voice API
   description: API for managing voice calls, phone numbers, and telephony features
