@@ -13,10 +13,10 @@ apis:
     humanURL: https://www.telefoon.com/voice
     baseURL: https://api.telefoon.com/v1/voice
     tags:
-      - Voice
       - Calls
-      - Telephony
       - Phone Numbers
+      - Telephony
+      - Voice
     properties:
       - type: Documentation
         url: https://docs.telefoon.com/voice
@@ -38,8 +38,8 @@ apis:
     humanURL: https://www.telefoon.com/sms
     baseURL: https://api.telefoon.com/v1/sms
     tags:
-      - SMS
       - Messaging
+      - SMS
       - Text Messages
     properties:
       - type: Documentation
@@ -62,9 +62,9 @@ apis:
     humanURL: https://www.telefoon.com/numbers
     baseURL: https://api.telefoon.com/v1/numbers
     tags:
-      - Phone Numbers
-      - Number Provisioning
       - Number Management
+      - Number Provisioning
+      - Phone Numbers
     properties:
       - type: Documentation
         url: https://docs.telefoon.com/numbers
@@ -82,8 +82,8 @@ maintainers:
     email: api-team@telefoon.com
     url: https://www.telefoon.com/about/api-team
 tags:
+  - CPaaS
+  - Phone Numbers
+  - SMS
   - Telecommunications
   - Voice
-  - SMS
-  - Phone Numbers
-  - CPaaS
