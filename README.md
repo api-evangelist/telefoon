@@ -1,71 +1,81 @@
-# Telefoon API (telefoon)
-APIs for Telefoon telecommunications services
+# Telefoon
 
-**URL:** [Visit APIs.json URL](https://www.telefoon.com)
+Telefoon is a GDPR-compliant cloud telephony and communications platform built for European markets. The platform provides programmable voice, SMS, and number management APIs with EU data residency, multi-language TTS (Dutch, French, German, English), branded sender IDs, and regulatory compliance for Dutch, Belgian, and broader EU telecommunications.
 
-## Tags:
-
- - Telecommunications, Voice, SMS, Phone Numbers, CPaaS
-
-## Timestamps
-
-- **Created:** 2024 
-- **Modified:** 2024 
+**Human URL:** [https://www.telefoon.com](https://www.telefoon.com)
+**Developer URL:** [https://developers.telefoon.com](https://developers.telefoon.com)
 
 ## APIs
 
 ### Telefoon Voice API
-API for managing voice calls, phone numbers, and telephony features
-
-**Human URL:** [https://www.telefoon.com/voice](https://www.telefoon.com/voice)
-
-
-#### Tags:
-
- - Voice, Calls, Telephony, Phone Numbers
-
-#### Properties
-
-- [Documentation](https://docs.telefoon.com/voice)
-- [OpenAPI](https://api.telefoon.com/voice/openapi.json)
-- [Authentication](https://docs.telefoon.com/voice/authentication)
-- [RateLimits](https://docs.telefoon.com/voice/rate-limits)
+GDPR-compliant EU voice API with multi-language TTS, call conferencing, and recording.
+- **OpenAPI Spec:** [openapi/telefoon-voice-openapi.yml](openapi/telefoon-voice-openapi.yml)
 
 ### Telefoon SMS API
-API for sending and receiving SMS messages
-
-**Human URL:** [https://www.telefoon.com/sms](https://www.telefoon.com/sms)
-
-
-#### Tags:
-
- - SMS, Messaging, Text Messages
-
-#### Properties
-
-- [Documentation](https://docs.telefoon.com/sms)
-- [OpenAPI](https://api.telefoon.com/sms/openapi.json)
-- [Authentication](https://docs.telefoon.com/sms/authentication)
-- [RateLimits](https://docs.telefoon.com/sms/rate-limits)
+EU SMS API with alphanumeric sender IDs, GDPR consent tracking, and delivery reports.
+- **OpenAPI Spec:** [openapi/telefoon-sms-openapi.yml](openapi/telefoon-sms-openapi.yml)
 
 ### Telefoon Number Management API
-API for purchasing, configuring, and managing phone numbers
+Dutch, Belgian, German, and EU number provisioning with regulatory compliance support.
+- **OpenAPI Spec:** [openapi/telefoon-numbers-openapi.yml](openapi/telefoon-numbers-openapi.yml)
 
-**Human URL:** [https://www.telefoon.com/numbers](https://www.telefoon.com/numbers)
+## Artifacts
 
+### OpenAPI Specifications
+| File | Description |
+|---|---|
+| [openapi/telefoon-voice-openapi.yml](openapi/telefoon-voice-openapi.yml) | Voice API — calls and conferencing with EU TTS |
+| [openapi/telefoon-sms-openapi.yml](openapi/telefoon-sms-openapi.yml) | SMS API — branded sender IDs and GDPR consent tracking |
+| [openapi/telefoon-numbers-openapi.yml](openapi/telefoon-numbers-openapi.yml) | Number Management API — EU numbers with regulatory compliance |
 
-#### Tags:
+### JSON Schemas
+| File | Description |
+|---|---|
+| [json-schema/telefoon-call-schema.json](json-schema/telefoon-call-schema.json) | Call object JSON Schema |
 
- - Phone Numbers, Number Provisioning, Number Management
+### JSON Structure
+| File | Description |
+|---|---|
+| [json-structure/telefoon-call-structure.json](json-structure/telefoon-call-structure.json) | Call object field structure |
 
-#### Properties
+### JSON-LD
+| File | Description |
+|---|---|
+| [json-ld/telefoon-context.jsonld](json-ld/telefoon-context.jsonld) | JSON-LD context including GDPR semantic mappings |
 
-- [Documentation](https://docs.telefoon.com/numbers)
-- [OpenAPI](https://api.telefoon.com/numbers/openapi.json)
-- [Authentication](https://docs.telefoon.com/numbers/authentication)
+### Examples
+| File | Description |
+|---|---|
+| [examples/telefoon-initiate-call-example.json](examples/telefoon-initiate-call-example.json) | Initiate a Dutch-language call |
+| [examples/telefoon-send-sms-example.json](examples/telefoon-send-sms-example.json) | Send a branded SMS (Dutch) with GDPR reference |
+
+### Spectral Rules
+| File | Description |
+|---|---|
+| [rules/telefoon-rules.yml](rules/telefoon-rules.yml) | Spectral ruleset for Telefoon API conventions |
+
+### Naftiko Capabilities
+| File | Description |
+|---|---|
+| [capabilities/shared/telefoon-voice.yaml](capabilities/shared/telefoon-voice.yaml) | Shared EU Voice API capability |
+| [capabilities/shared/telefoon-sms.yaml](capabilities/shared/telefoon-sms.yaml) | Shared EU SMS API capability |
+| [capabilities/eu-communications.yaml](capabilities/eu-communications.yaml) | EU communications workflow (REST port 8080, MCP port 9090) |
+
+### Vocabulary
+| File | Description |
+|---|---|
+| [vocabulary/telefoon-vocabulary.yml](vocabulary/telefoon-vocabulary.yml) | Telefoon vocabulary including GDPR, EU number types, and EU telecom terms |
+
+## Common Properties
+
+| Property | URL |
+|---|---|
+| Authentication | https://developers.telefoon.com/authentication |
+| GDPR | https://www.telefoon.com/gdpr |
+| Rate Limits | https://developers.telefoon.com/rate-limits |
+| Status | https://status.telefoon.com |
+| Terms of Service | https://www.telefoon.com/terms |
+| Privacy Policy | https://www.telefoon.com/privacy |
 
 ## Maintainers
-
-**FN:** Telefoon API Team
-
-**Email:** api-team@telefoon.com
+- **Telefoon API Team** — api-team@telefoon.com

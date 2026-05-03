@@ -1,0 +1,136 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Telefoon SMS API"
+  description: "GDPR-compliant SMS API for European markets with branded sender IDs and consent tracking."
+  tags:
+    - Europe
+    - GDPR Compliant
+    - Messaging
+    - Netherlands
+    - SMS
+    - Sender ID
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TELEFOON_API_KEY: TELEFOON_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: telefoon-sms
+      baseUri: https://api.telefoon.com/v1/sms
+      description: "Telefoon SMS API"
+      authentication:
+        type: apikey
+        key: X-API-Key
+        value: "{{TELEFOON_API_KEY}}"
+        placement: header
+      resources:
+        - name: messages
+          path: /messages
+          description: "SMS messaging"
+          operations:
+            - name: list-messages
+              method: GET
+              description: "List messages"
+              inputParameters:
+                - name: direction
+                  in: query
+                  type: string
+                  required: false
+                  description: "inbound or outbound"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: send-message
+              method: POST
+              description: "Send an SMS with optional GDPR consent reference"
+              inputParameters:
+                - name: to
+                  in: body
+                  type: string
+                  required: true
+                  description: "Recipient (E.164)"
+                - name: from
+                  in: body
+                  type: string
+                  required: true
+                  description: "Sender number or alphanumeric ID"
+                - name: body
+                  in: body
+                  type: string
+                  required: false
+                  description: "Message text"
+                - name: gdpr_consent_ref
+                  in: body
+                  type: string
+                  required: false
+                  description: "GDPR consent reference for audit"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8141
+      namespace: telefoon-sms-rest
+      resources:
+        - path: /v1/messages
+          name: messages
+          operations:
+            - method: GET
+              name: list-messages
+              description: "List messages"
+              call: "telefoon-sms.list-messages"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: send-message
+              description: "Send SMS"
+              call: "telefoon-sms.send-message"
+              with:
+                to: "rest.to"
+                from: "rest.from"
+                body: "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9141
+      namespace: telefoon-sms-mcp
+      transport: http
+      tools:
+        - name: list-messages
+          description: "List SMS messages sent or received"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "telefoon-sms.list-messages"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: send-sms
+          description: "Send an SMS to a European phone number with optional branded sender name and GDPR consent reference"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "telefoon-sms.send-message"
+          with:
+            to: "tools.to"
+            from: "tools.from"
+            body: "tools.body"
+            gdpr_consent_ref: "tools.gdpr_consent_ref"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.telefoon.com/v1/sms/messages",
+    "headers": { "X-API-Key": "YOUR_API_KEY", "Content-Type": "application/json" },
+    "body": {
+      "to": "+31612345678",
+      "from": "MijnBedrijf",
+      "body": "Uw bestelling #12345 is verzonden. Verwachte levering: morgen tussen 10:00 en 12:00.",
+      "gdpr_consent_ref": "consent_20260503_123456",
+      "status_callback": "https://your-app.example.com/sms-delivery"
+    }
+  },
+  "response": {
+    "id": "SM1234abcd5678efgh1234abcd5678efgh",
+    "status": "queued",
+    "direction": "outbound",
+    "from": "MijnBedrijf",
+    "to": "+31612345678",
+    "body": "Uw bestelling #12345 is verzonden. Verwachte levering: morgen tussen 10:00 en 12:00.",
+    "num_segments": 1,
+    "price": null,
+    "price_unit": "EUR",
+    "date_created": "2026-05-03T10:00:00Z",
+    "date_sent": null
+  }
+}

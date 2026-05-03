@@ -1,0 +1,167 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Telefoon Voice API"
+  description: "GDPR-compliant EU voice API for calls and conferencing across Dutch, Belgian, and European networks."
+  tags:
+    - Belgium
+    - Calls
+    - EU Telephony
+    - GDPR Compliant
+    - Netherlands
+    - Telephony
+    - Voice
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TELEFOON_API_KEY: TELEFOON_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: telefoon-voice
+      baseUri: https://api.telefoon.com/v1/voice
+      description: "Telefoon Voice API — EU telephony platform"
+      authentication:
+        type: apikey
+        key: X-API-Key
+        value: "{{TELEFOON_API_KEY}}"
+        placement: header
+      resources:
+        - name: calls
+          path: /calls
+          description: "Voice call management"
+          operations:
+            - name: list-calls
+              method: GET
+              description: "List voice calls"
+              inputParameters:
+                - name: status
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter by call status"
+                - name: direction
+                  in: query
+                  type: string
+                  required: false
+                  description: "inbound or outbound"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: initiate-call
+              method: POST
+              description: "Initiate an outbound voice call"
+              inputParameters:
+                - name: to
+                  in: body
+                  type: string
+                  required: true
+                  description: "Destination number (E.164)"
+                - name: from
+                  in: body
+                  type: string
+                  required: true
+                  description: "Caller ID"
+                - name: tts_language
+                  in: body
+                  type: string
+                  required: false
+                  description: "TTS language (nl-NL, fr-BE, de-DE, en-GB)"
+                - name: record
+                  in: body
+                  type: boolean
+                  required: false
+                  description: "Record call (requires GDPR consent)"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: conferences
+          path: /conferences
+          description: "Conference management"
+          operations:
+            - name: list-conferences
+              method: GET
+              description: "List conferences"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-conference
+              method: POST
+              description: "Create a conference room"
+              inputParameters:
+                - name: friendly_name
+                  in: body
+                  type: string
+                  required: false
+                  description: "Conference name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8140
+      namespace: telefoon-voice-rest
+      resources:
+        - path: /v1/calls
+          name: calls
+          description: "Voice calls"
+          operations:
+            - method: GET
+              name: list-calls
+              description: "List voice calls"
+              call: "telefoon-voice.list-calls"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: initiate-call
+              description: "Initiate a call"
+              call: "telefoon-voice.initiate-call"
+              with:
+                to: "rest.to"
+                from: "rest.from"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9140
+      namespace: telefoon-voice-mcp
+      transport: http
+      tools:
+        - name: list-calls
+          description: "List EU voice calls"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "telefoon-voice.list-calls"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: make-call
+          description: "Initiate an outbound call through EU networks"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "telefoon-voice.initiate-call"
+          with:
+            to: "tools.to"
+            from: "tools.from"
+            tts_language: "tools.tts_language"
+          outputParameters:
+            - type: object
+              mapping: "$."

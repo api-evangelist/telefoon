@@ -1,0 +1,31 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "telefoon": "https://developers.telefoon.com/schema/",
+    "gdpr": "https://gdpr-info.eu/schema/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Call": "telefoon:Call",
+    "Message": "telefoon:Message",
+    "PhoneNumber": "schema:ContactPoint",
+    "Conference": "telefoon:Conference",
+    "id": { "@id": "schema:identifier", "@type": "xsd:string" },
+    "status": { "@id": "telefoon:status", "@type": "xsd:string" },
+    "direction": { "@id": "telefoon:direction", "@type": "xsd:string" },
+    "from": { "@id": "schema:sender", "@type": "xsd:string" },
+    "to": { "@id": "schema:recipient", "@type": "xsd:string" },
+    "body": { "@id": "schema:text", "@type": "xsd:string" },
+    "duration": { "@id": "schema:duration", "@type": "xsd:integer" },
+    "start_time": { "@id": "schema:startTime", "@type": "xsd:dateTime" },
+    "end_time": { "@id": "schema:endTime", "@type": "xsd:dateTime" },
+    "price": { "@id": "schema:price", "@type": "xsd:string" },
+    "price_unit": { "@id": "schema:priceCurrency", "@type": "xsd:string" },
+    "phone_number": { "@id": "schema:telephone", "@type": "xsd:string" },
+    "country_code": { "@id": "schema:addressCountry", "@type": "xsd:string" },
+    "friendly_name": { "@id": "schema:name", "@type": "xsd:string" },
+    "date_created": { "@id": "schema:dateCreated", "@type": "xsd:dateTime" },
+    "gdpr_consent_ref": { "@id": "gdpr:consentReference", "@type": "xsd:string" },
+    "monthly_rate": { "@id": "schema:price", "@type": "xsd:string" },
+    "address_required": { "@id": "telefoon:addressRequired", "@type": "xsd:boolean" }
+  }
+}

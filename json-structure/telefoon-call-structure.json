@@ -1,0 +1,16 @@
+{
+  "name": "Telefoon Call",
+  "description": "Structure of a Call object in the Telefoon Voice API (EU platform)",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique call identifier" },
+    { "name": "status", "type": "string", "required": true, "description": "queued, ringing, in-progress, completed, failed, busy, no-answer, canceled" },
+    { "name": "direction", "type": "string", "required": true, "description": "inbound or outbound" },
+    { "name": "from", "type": "string", "required": true, "description": "Originating E.164 phone number" },
+    { "name": "to", "type": "string", "required": true, "description": "Destination E.164 phone number" },
+    { "name": "duration", "type": "integer", "required": false, "description": "Duration in seconds" },
+    { "name": "start_time", "type": "string", "required": false, "description": "ISO 8601 start timestamp" },
+    { "name": "end_time", "type": "string", "required": false, "description": "ISO 8601 end timestamp" },
+    { "name": "price", "type": "string", "required": false, "description": "Cost of the call" },
+    { "name": "price_unit", "type": "string", "required": false, "description": "Currency code (default EUR)" }
+  ]
+}

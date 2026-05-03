@@ -1,0 +1,191 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Telefoon EU Communications"
+  description: >-
+    Unified GDPR-compliant communications capability for European markets.
+    Combines Telefoon Voice and SMS APIs for Dutch, Belgian, German, and EU-wide
+    communications. Supports branded sender IDs, multi-language TTS, GDPR consent
+    tracking, and EU data residency. Designed for developers building compliant
+    European customer communication workflows.
+  tags:
+    - Belgium
+    - CPaaS
+    - EU Data Residency
+    - Europe
+    - GDPR Compliant
+    - Messaging
+    - Netherlands
+    - SMS
+    - Telephony
+    - Voice
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TELEFOON_API_KEY: TELEFOON_API_KEY
+
+capability:
+  consumes:
+    - import: telefoon-voice
+      location: ./shared/telefoon-voice.yaml
+    - import: telefoon-sms
+      location: ./shared/telefoon-sms.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: eu-communications-api
+      description: "Unified GDPR-compliant EU communications REST API."
+      resources:
+        - path: /v1/calls
+          name: calls
+          description: "EU voice call management"
+          operations:
+            - method: GET
+              name: list-calls
+              description: "List voice calls"
+              call: "telefoon-voice.list-calls"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: initiate-call
+              description: "Initiate an outbound EU call with multi-language TTS support"
+              call: "telefoon-voice.initiate-call"
+              with:
+                to: "rest.to"
+                from: "rest.from"
+                tts_language: "rest.tts_language"
+                record: "rest.record"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/conferences
+          name: conferences
+          description: "EU conference calls"
+          operations:
+            - method: GET
+              name: list-conferences
+              description: "List conferences"
+              call: "telefoon-voice.list-conferences"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-conference
+              description: "Create a conference room"
+              call: "telefoon-voice.create-conference"
+              with:
+                friendly_name: "rest.friendly_name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/messages
+          name: messages
+          description: "GDPR-compliant SMS messaging"
+          operations:
+            - method: GET
+              name: list-messages
+              description: "List messages"
+              call: "telefoon-sms.list-messages"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: send-message
+              description: "Send an SMS with optional branded sender ID and GDPR consent reference"
+              call: "telefoon-sms.send-message"
+              with:
+                to: "rest.to"
+                from: "rest.from"
+                body: "rest.body"
+                gdpr_consent_ref: "rest.gdpr_consent_ref"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: eu-communications-mcp
+      transport: http
+      description: "MCP server for AI-assisted GDPR-compliant European communications."
+      tools:
+        - name: list-calls
+          description: "List EU voice calls with optional status and direction filters"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "telefoon-voice.list-calls"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: make-eu-call
+          description: "Initiate an outbound call via EU networks with multi-language TTS (nl-NL, fr-BE, de-DE, en-GB)"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "telefoon-voice.initiate-call"
+          with:
+            to: "tools.to"
+            from: "tools.from"
+            tts_language: "tools.tts_language"
+            record: "tools.record"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-conferences
+          description: "List EU conference calls"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "telefoon-voice.list-conferences"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-conference
+          description: "Create a new EU conference call room"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "telefoon-voice.create-conference"
+          with:
+            friendly_name: "tools.friendly_name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-messages
+          description: "List EU SMS messages sent or received"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "telefoon-sms.list-messages"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: send-eu-sms
+          description: "Send an SMS in European markets with branded sender ID and GDPR consent reference for compliance"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "telefoon-sms.send-message"
+          with:
+            to: "tools.to"
+            from: "tools.from"
+            body: "tools.body"
+            gdpr_consent_ref: "tools.gdpr_consent_ref"
+          outputParameters:
+            - type: object
+              mapping: "$."

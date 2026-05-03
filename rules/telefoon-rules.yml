@@ -1,0 +1,76 @@
+extends: spectral:oas
+rules:
+  telefoon-operation-summary-title-case:
+    description: All operation summaries must use Title Case
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^([A-Z][a-z0-9]*([ ][A-Z][a-z0-9]*)*|[A-Z]+)$"
+
+  telefoon-operation-must-have-operationid:
+    description: All operations must have an operationId
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: operationId
+      function: truthy
+
+  telefoon-operationid-camelcase:
+    description: Operation IDs must use camelCase
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  telefoon-operation-must-have-description:
+    description: All operations should have a description
+    severity: info
+    given: "$.paths[*][*]"
+    then:
+      field: description
+      function: truthy
+
+  telefoon-operation-must-have-tag:
+    description: All operations must have at least one tag
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  telefoon-response-200-required:
+    description: GET operations must define a 200 response
+    severity: error
+    given: "$.paths[*].get.responses"
+    then:
+      field: "200"
+      function: truthy
+
+  telefoon-delete-204-response:
+    description: DELETE operations should return 204
+    severity: warn
+    given: "$.paths[*].delete.responses"
+    then:
+      field: "204"
+      function: truthy
+
+  telefoon-eu-server-required:
+    description: API server must use EU data center domain
+    severity: warn
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://api\\.telefoon\\.com"
+
+  telefoon-servers-required:
+    description: API must define servers
+    severity: error
+    given: "$"
+    then:
+      field: servers
+      function: truthy

@@ -1,0 +1,109 @@
+name: Telefoon Vocabulary
+description: >-
+  Vocabulary for the Telefoon EU cloud communications platform covering voice, SMS,
+  number management, GDPR compliance, and European telecommunications concepts.
+version: '1.0'
+created: '2026-05-03'
+modified: '2026-05-03'
+
+categories:
+  - name: Voice
+    terms:
+      - term: Call
+        definition: A telephone call session via EU telephony networks. Can be inbound or outbound.
+        tags: [Voice, Core]
+      - term: TTS Language
+        definition: Text-to-speech language code for call audio. Supported: nl-NL, fr-BE, de-DE, en-GB.
+        tags: [Voice]
+      - term: IVR
+        definition: Interactive Voice Response — automated call flow with multi-language prompts.
+        tags: [Voice]
+      - term: Conference
+        definition: A multi-party audio call session with participant management.
+        tags: [Voice, Conferencing]
+
+  - name: SMS
+    terms:
+      - term: Alphanumeric Sender ID
+        definition: A branded text name (max 11 characters) used as the SMS sender instead of a phone number. Requires registration in EU markets.
+        tags: [SMS]
+      - term: A2P SMS
+        definition: Application-to-Person SMS — messages sent from a software application to a consumer handset.
+        tags: [SMS]
+      - term: Two-Way SMS
+        definition: Conversational messaging where users can reply to SMS messages.
+        tags: [SMS]
+      - term: Delivery Report
+        definition: Status notification confirming SMS delivery to the handset. Sent via webhook.
+        tags: [SMS]
+
+  - name: GDPR and Compliance
+    terms:
+      - term: GDPR
+        definition: >-
+          General Data Protection Regulation — EU regulation governing personal data processing.
+          All Telefoon communications must comply with GDPR requirements for consent and data handling.
+        tags: [GDPR, Compliance]
+      - term: Consent Reference
+        definition: >-
+          A reference ID linking a communication to a documented consent record.
+          Telefoon supports gdpr_consent_ref for tracking messaging consent per GDPR Article 7.
+        tags: [GDPR, Compliance]
+      - term: Right to Erasure
+        definition: >-
+          GDPR Article 17 right — ability to delete message records on request.
+          Supported via DELETE on message resources.
+        tags: [GDPR, Compliance]
+      - term: EU Data Residency
+        definition: >-
+          All call data, message data, and metadata is stored within EU data centers,
+          ensuring GDPR compliance for EU-based businesses.
+        tags: [GDPR, Compliance]
+      - term: Address Registration
+        definition: >-
+          Some EU number types (Dutch 088, Belgian service numbers) require address
+          registration for regulatory compliance before purchase.
+        tags: [Compliance, Numbers]
+
+  - name: Number Types (EU)
+    terms:
+      - term: Geographic Number
+        definition: >-
+          A local phone number tied to a specific area code (NDC). E.g., Amsterdam 020,
+          Rotterdam 010, Brussels 02. Requires local presence in some markets.
+        tags: [Numbers, Netherlands, Belgium]
+      - term: National Number
+        definition: >-
+          A non-geographic national number reachable from anywhere in the country.
+          In Netherlands: 085, 088. In Belgium: 03, 09.
+        tags: [Numbers, Netherlands, Belgium]
+      - term: Toll-Free Number
+        definition: >-
+          Free for the caller — 0800 numbers in Netherlands and Belgium.
+          The called party (business) pays the per-minute rate.
+        tags: [Numbers]
+      - term: Premium-Rate Number
+        definition: >-
+          Numbers where callers pay a premium rate beyond the standard call charge.
+          0900 in Netherlands, 0905 in Belgium. Requires OPTA/BIPT registration.
+        tags: [Numbers, Belgium, Netherlands]
+      - term: NDC
+        definition: >-
+          National Destination Code — the area code portion of a Dutch or Belgian phone number
+          (e.g., 020 for Amsterdam, 010 for Rotterdam, 02 for Brussels).
+        tags: [Numbers, Standard]
+
+  - name: Platform
+    terms:
+      - term: CPaaS
+        definition: Communications Platform as a Service — cloud APIs for programmable communications.
+        tags: [Platform]
+      - term: E.164
+        definition: International standard phone number format (+[country code][number]).
+        tags: [Platform, Standard]
+      - term: Webhook
+        definition: HTTPS callback URL for receiving real-time event notifications.
+        tags: [Platform, Integration]
+      - term: API Key
+        definition: Authentication credential in X-API-Key header for Telefoon API requests.
+        tags: [Platform, Security]

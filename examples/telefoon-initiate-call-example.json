@@ -1,0 +1,27 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.telefoon.com/v1/voice/calls",
+    "headers": { "X-API-Key": "YOUR_API_KEY", "Content-Type": "application/json" },
+    "body": {
+      "to": "+31201234567",
+      "from": "+31851234567",
+      "url": "https://your-app.example.com/call-webhook",
+      "tts_language": "nl-NL",
+      "record": false,
+      "timeout": 30
+    }
+  },
+  "response": {
+    "id": "CA1234abcd5678efgh1234abcd5678efgh",
+    "status": "queued",
+    "direction": "outbound",
+    "from": "+31851234567",
+    "to": "+31201234567",
+    "start_time": null,
+    "end_time": null,
+    "duration": null,
+    "price": null,
+    "price_unit": "EUR"
+  }
+}
