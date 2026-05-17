@@ -126,17 +126,17 @@ apis:
 common:
   - type: Authentication
     url: https://developers.telefoon.com/authentication
-  - type: Getting Started
+  - type: GettingStarted
     url: https://developers.telefoon.com/getting-started
-  - type: Rate Limits
+  - type: RateLimits
     url: https://developers.telefoon.com/rate-limits
   - type: GDPR
     url: https://www.telefoon.com/gdpr
-  - type: Status
+  - type: StatusPage
     url: https://status.telefoon.com
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.telefoon.com/terms
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.telefoon.com/privacy
   - type: Pricing
     url: https://www.telefoon.com/pricing
