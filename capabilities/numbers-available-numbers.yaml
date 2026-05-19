@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Telefoon Number Management API — Available Numbers
+  description: 'Telefoon Number Management API — Available Numbers. 1 operations. Lead operation: Search Available Numbers.
+    Self-contained Naftiko capability covering one Telefoon business surface.'
+  tags:
+  - Telefoon
+  - Available Numbers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TELEFOON_API_KEY: TELEFOON_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: numbers-available-numbers
+    baseUri: https://api.telefoon.com/v1/numbers
+    description: Telefoon Number Management API — Available Numbers business capability. Self-contained, no shared references.
+    resources:
+    - name: available
+      path: /available
+      operations:
+      - name: searchavailablenumbers
+        method: GET
+        description: Search Available Numbers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: country_code
+          in: query
+          type: string
+          description: ISO 3166-1 alpha-2 country code (NL, BE, DE, FR, etc.)
+          required: true
+        - name: type
+          in: query
+          type: string
+          description: Number type
+        - name: area_code
+          in: query
+          type: string
+          description: Area code / NDC (e.g., 020 for Amsterdam)
+        - name: sms_enabled
+          in: query
+          type: boolean
+          description: Filter for SMS-capable numbers
+        - name: limit
+          in: query
+          type: integer
+    authentication:
+      type: apikey
+      key: X-API-Key
+      value: '{{env.TELEFOON_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: numbers-available-numbers-rest
+    port: 8080
+    description: REST adapter for Telefoon Number Management API — Available Numbers. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/available
+      name: available
+      description: REST surface for available.
+      operations:
+      - method: GET
+        name: searchavailablenumbers
+        description: Search Available Numbers
+        call: numbers-available-numbers.searchavailablenumbers
+        with:
+          country_code: rest.country_code
+          type: rest.type
+          area_code: rest.area_code
+          sms_enabled: rest.sms_enabled
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: numbers-available-numbers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Telefoon Number Management API — Available Numbers. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: search-available-numbers
+      description: Search Available Numbers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: numbers-available-numbers.searchavailablenumbers
+      with:
+        country_code: tools.country_code
+        type: tools.type
+        area_code: tools.area_code
+        sms_enabled: tools.sms_enabled
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
