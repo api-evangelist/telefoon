@@ -1,0 +1,150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Telefoon Voice API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Calls",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Calls",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.telefoon.com/v1/voice/calls",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by call status"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Filter by call direction"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Results per page"
+              }
+            ]
+          },
+          "docs": "List voice calls with optional status, direction, and date filtering."
+        },
+        {
+          "info": {
+            "name": "Initiate Call",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.telefoon.com/v1/voice/calls",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate an outbound voice call through European networks."
+        },
+        {
+          "info": {
+            "name": "Get Call",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.telefoon.com/v1/voice/calls/:call_id",
+            "params": [
+              {
+                "name": "call_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique call identifier"
+              }
+            ]
+          },
+          "docs": "Get details for a specific call."
+        },
+        {
+          "info": {
+            "name": "End Call",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.telefoon.com/v1/voice/calls/:call_id",
+            "params": [
+              {
+                "name": "call_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique call identifier"
+              }
+            ]
+          },
+          "docs": "Hang up an active or ringing call."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Conferences",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Conferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.telefoon.com/v1/voice/conferences"
+          },
+          "docs": "List conference calls."
+        },
+        {
+          "info": {
+            "name": "Create Conference",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.telefoon.com/v1/voice/conferences",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new conference room."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
