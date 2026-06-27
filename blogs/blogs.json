@@ -3,13 +3,10 @@
   "feeds": [
     {
       "source": "https://blog.telefoon.com",
-      "error": "URLError"
-    },
-    {
-      "source": "https://www.telefoon.com/support",
-      "error": "URLError"
+      "saved": 0,
+      "error": "DNS resolution failed (ENOTFOUND)"
     }
   ],
-  "fetched": "2026-06-14T20:42:17Z",
+  "fetched": "2026-06-27T13:15:32Z",
   "post_count": 0
 }
