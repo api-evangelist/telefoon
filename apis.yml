@@ -114,6 +114,10 @@ apis:
       - type: Email
         url: mailto:api-support@telefoon.com
 common:
+  - type: DomainSecurity
+    url: security/telefoon-domain-security.yml
+  - type: Authentication
+    url: authentication/telefoon-authentication.yml
   - type: Authentication
     url: https://developers.telefoon.com/authentication
   - type: GettingStarted

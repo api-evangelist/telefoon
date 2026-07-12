@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: developers.telefoon.com
+  https: false
+- host: api.telefoon.com
+  https: false
+domains:
+- domain: telefoon.com
+  dnssec: true
+  caa: []
+  spf: false
+  dmarc: false
