@@ -2,11 +2,10 @@
   "repo": "telefoon",
   "feeds": [
     {
-      "source": "https://blog.telefoon.com",
-      "saved": 0,
-      "error": "DNS resolution failed (ENOTFOUND)"
+      "source": "https://www.telefoon.com/support",
+      "error": "URLError"
     }
   ],
-  "fetched": "2026-06-27T13:15:32Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "post_count": 0
 }
