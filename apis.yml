@@ -114,6 +114,8 @@ apis:
       - type: Email
         url: mailto:api-support@telefoon.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/telefoon-agentic-access.yml
   - type: DomainSecurity
     url: security/telefoon-domain-security.yml
   - type: Authentication
