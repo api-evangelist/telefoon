@@ -1,22 +1,20 @@
 openapi: 3.0.3
 info:
-  title: Telefoon SMS API
-  description: >-
-    GDPR-compliant SMS API for European markets. Send A2P SMS with branded sender IDs,
-    receive inbound messages, track delivery reports, and maintain GDPR audit logs.
+  title: Telefoon Number Management Available Numbers Messages API
+  description: Search, purchase, and manage Dutch, Belgian, German, and European phone numbers. Supports local geographic numbers, national numbers, toll-free (0800), premium (0900), and service numbers with full compliance for EU regulatory requirements.
   version: v1
   contact:
     name: Telefoon Support
     url: https://www.telefoon.com/support
   termsOfService: https://www.telefoon.com/terms
 servers:
-  - url: https://api.telefoon.com/v1/sms
-    description: Telefoon SMS API (EU data center)
+- url: https://api.telefoon.com/v1/numbers
+  description: Telefoon Number Management API
 security:
-  - ApiKeyAuth: []
+- ApiKeyAuth: []
 tags:
-  - name: Messages
-    description: Send and receive SMS messages
+- name: Messages
+  description: Send and receive SMS messages
 paths:
   /messages:
     get:
@@ -24,27 +22,36 @@ paths:
       summary: List Messages
       description: List sent and received messages.
       tags:
-        - Messages
+      - Messages
       parameters:
-        - name: direction
-          in: query
-          schema:
-            type: string
-            enum: [inbound, outbound]
-        - name: status
-          in: query
-          schema:
-            type: string
-            enum: [queued, sending, sent, delivered, undelivered, failed, received]
-        - name: page
-          in: query
-          schema:
-            type: integer
-        - name: page_size
-          in: query
-          schema:
-            type: integer
-            maximum: 100
+      - name: direction
+        in: query
+        schema:
+          type: string
+          enum:
+          - inbound
+          - outbound
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - queued
+          - sending
+          - sent
+          - delivered
+          - undelivered
+          - failed
+          - received
+      - name: page
+        in: query
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        schema:
+          type: integer
+          maximum: 100
       responses:
         '200':
           description: List of messages
@@ -64,7 +71,7 @@ paths:
       summary: Send Message
       description: Send an SMS message with optional branded sender ID.
       tags:
-        - Messages
+      - Messages
       requestBody:
         required: true
         content:
@@ -72,8 +79,8 @@ paths:
             schema:
               type: object
               required:
-                - to
-                - from
+              - to
+              - from
               properties:
                 to:
                   type: string
@@ -106,13 +113,13 @@ paths:
       summary: Get Message
       description: Get details for a specific message.
       tags:
-        - Messages
+      - Messages
       parameters:
-        - name: message_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: message_id
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Message details
@@ -127,41 +134,45 @@ paths:
       summary: Delete Message
       description: Delete a message record (GDPR right-to-erasure support).
       tags:
-        - Messages
+      - Messages
       parameters:
-        - name: message_id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: message_id
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '204':
           description: Message deleted
 components:
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: X-API-Key
   schemas:
     Message:
       type: object
       required:
-        - id
-        - status
-        - direction
-        - from
-        - to
+      - id
+      - status
+      - direction
+      - from
+      - to
       properties:
         id:
           type: string
           description: Unique message identifier
         status:
           type: string
-          enum: [queued, sending, sent, delivered, undelivered, failed, received]
+          enum:
+          - queued
+          - sending
+          - sent
+          - delivered
+          - undelivered
+          - failed
+          - received
         direction:
           type: string
-          enum: [inbound, outbound]
+          enum:
+          - inbound
+          - outbound
         from:
           type: string
           description: Sender number or alphanumeric ID
@@ -192,3 +203,8 @@ components:
         error_message:
           type: string
           description: Error description
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
