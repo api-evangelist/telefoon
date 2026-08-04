@@ -1,0 +1,267 @@
+openapi: 3.0.3
+info:
+  title: Telefoon Voice API
+  description: >-
+    GDPR-compliant programmable voice API for European markets. Make and receive calls
+    across Dutch, Belgian, German, and EU networks with multi-language TTS support.
+  version: v1
+  contact:
+    name: Telefoon Support
+    url: https://www.telefoon.com/support
+    email: api-support@telefoon.com
+  termsOfService: https://www.telefoon.com/terms
+servers:
+  - url: https://api.telefoon.com/v1/voice
+    description: Telefoon Voice API (EU data center)
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Calls
+    description: Make and manage voice calls
+  - name: Conferences
+    description: Multi-party conferencing
+paths:
+  /calls:
+    get:
+      operationId: listCalls
+      summary: List Calls
+      description: List voice calls with optional status, direction, and date filtering.
+      tags:
+        - Calls
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [queued, ringing, in-progress, completed, failed, busy, no-answer, canceled]
+          description: Filter by call status
+        - name: direction
+          in: query
+          schema:
+            type: string
+            enum: [inbound, outbound]
+          description: Filter by call direction
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: Page number
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            maximum: 100
+          description: Results per page
+      responses:
+        '200':
+          description: List of calls
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  calls:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Call'
+                  total:
+                    type: integer
+    post:
+      operationId: initiateCall
+      summary: Initiate Call
+      description: Initiate an outbound voice call through European networks.
+      tags:
+        - Calls
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - to
+                - from
+              properties:
+                to:
+                  type: string
+                  description: Destination phone number in E.164 format
+                from:
+                  type: string
+                  description: Caller ID (must be a Telefoon number)
+                url:
+                  type: string
+                  description: Webhook URL for call flow (XML or JSON)
+                status_callback:
+                  type: string
+                  description: URL for status change events
+                timeout:
+                  type: integer
+                  default: 30
+                  description: Answer timeout in seconds
+                record:
+                  type: boolean
+                  description: Record the call (GDPR consent required)
+                tts_language:
+                  type: string
+                  description: Language for TTS (e.g., nl-NL, fr-BE, de-DE, en-GB)
+      responses:
+        '201':
+          description: Call initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Call'
+  /calls/{call_id}:
+    get:
+      operationId: getCall
+      summary: Get Call
+      description: Get details for a specific call.
+      tags:
+        - Calls
+      parameters:
+        - name: call_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique call identifier
+      responses:
+        '200':
+          description: Call details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Call'
+        '404':
+          description: Call not found
+    delete:
+      operationId: endCall
+      summary: End Call
+      description: Hang up an active or ringing call.
+      tags:
+        - Calls
+      parameters:
+        - name: call_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique call identifier
+      responses:
+        '204':
+          description: Call ended
+  /conferences:
+    get:
+      operationId: listConferences
+      summary: List Conferences
+      description: List conference calls.
+      tags:
+        - Conferences
+      responses:
+        '200':
+          description: List of conferences
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conferences:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Conference'
+    post:
+      operationId: createConference
+      summary: Create Conference
+      description: Create a new conference room.
+      tags:
+        - Conferences
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                friendly_name:
+                  type: string
+                  description: Conference name
+                max_participants:
+                  type: integer
+                  default: 100
+                  description: Maximum participants
+                record:
+                  type: boolean
+                  description: Record the conference (GDPR consent required)
+      responses:
+        '201':
+          description: Conference created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conference'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    Call:
+      type: object
+      required:
+        - id
+        - status
+        - direction
+        - from
+        - to
+      properties:
+        id:
+          type: string
+          description: Unique call identifier
+        status:
+          type: string
+          enum: [queued, ringing, in-progress, completed, failed, busy, no-answer, canceled]
+        direction:
+          type: string
+          enum: [inbound, outbound]
+        from:
+          type: string
+          description: Originating phone number (E.164)
+        to:
+          type: string
+          description: Destination phone number (E.164)
+        duration:
+          type: integer
+          description: Duration in seconds
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        price:
+          type: string
+          description: Call cost
+        price_unit:
+          type: string
+          description: ISO 4217 currency (default EUR)
+    Conference:
+      type: object
+      required:
+        - id
+        - status
+      properties:
+        id:
+          type: string
+          description: Unique conference identifier
+        friendly_name:
+          type: string
+          description: Conference name
+        status:
+          type: string
+          enum: [init, in-progress, completed]
+        participant_count:
+          type: integer
+          description: Current participants
+        date_created:
+          type: string
+          format: date-time

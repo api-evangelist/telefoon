@@ -1,0 +1,194 @@
+openapi: 3.0.3
+info:
+  title: Telefoon SMS API
+  description: >-
+    GDPR-compliant SMS API for European markets. Send A2P SMS with branded sender IDs,
+    receive inbound messages, track delivery reports, and maintain GDPR audit logs.
+  version: v1
+  contact:
+    name: Telefoon Support
+    url: https://www.telefoon.com/support
+  termsOfService: https://www.telefoon.com/terms
+servers:
+  - url: https://api.telefoon.com/v1/sms
+    description: Telefoon SMS API (EU data center)
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Messages
+    description: Send and receive SMS messages
+paths:
+  /messages:
+    get:
+      operationId: listMessages
+      summary: List Messages
+      description: List sent and received messages.
+      tags:
+        - Messages
+      parameters:
+        - name: direction
+          in: query
+          schema:
+            type: string
+            enum: [inbound, outbound]
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [queued, sending, sent, delivered, undelivered, failed, received]
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: page_size
+          in: query
+          schema:
+            type: integer
+            maximum: 100
+      responses:
+        '200':
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Message'
+                  total:
+                    type: integer
+    post:
+      operationId: sendMessage
+      summary: Send Message
+      description: Send an SMS message with optional branded sender ID.
+      tags:
+        - Messages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - to
+                - from
+              properties:
+                to:
+                  type: string
+                  description: Recipient phone number in E.164 format
+                from:
+                  type: string
+                  description: Sender ID — phone number or alphanumeric sender name (max 11 chars)
+                body:
+                  type: string
+                  description: Message text (max 160 chars per segment)
+                sender_id:
+                  type: string
+                  description: Registered alphanumeric sender name (EU regulated markets)
+                status_callback:
+                  type: string
+                  description: URL for delivery status webhooks
+                gdpr_consent_ref:
+                  type: string
+                  description: Reference to consent record for GDPR compliance tracking
+      responses:
+        '201':
+          description: Message sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+  /messages/{message_id}:
+    get:
+      operationId: getMessage
+      summary: Get Message
+      description: Get details for a specific message.
+      tags:
+        - Messages
+      parameters:
+        - name: message_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Message details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '404':
+          description: Not found
+    delete:
+      operationId: deleteMessage
+      summary: Delete Message
+      description: Delete a message record (GDPR right-to-erasure support).
+      tags:
+        - Messages
+      parameters:
+        - name: message_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Message deleted
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    Message:
+      type: object
+      required:
+        - id
+        - status
+        - direction
+        - from
+        - to
+      properties:
+        id:
+          type: string
+          description: Unique message identifier
+        status:
+          type: string
+          enum: [queued, sending, sent, delivered, undelivered, failed, received]
+        direction:
+          type: string
+          enum: [inbound, outbound]
+        from:
+          type: string
+          description: Sender number or alphanumeric ID
+        to:
+          type: string
+          description: Recipient phone number
+        body:
+          type: string
+          description: Message text
+        num_segments:
+          type: integer
+          description: SMS segments used
+        price:
+          type: string
+          description: Message cost
+        price_unit:
+          type: string
+          description: Currency (default EUR)
+        date_created:
+          type: string
+          format: date-time
+        date_sent:
+          type: string
+          format: date-time
+        error_code:
+          type: integer
+          description: Error code if failed
+        error_message:
+          type: string
+          description: Error description

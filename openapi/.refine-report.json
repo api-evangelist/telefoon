@@ -1,0 +1,22 @@
+{
+  "provider": "telefoon",
+  "sources": [
+    "telefoon-available-numbers-api-openapi.yml",
+    "telefoon-calls-api-openapi.yml",
+    "telefoon-conferences-api-openapi.yml",
+    "telefoon-messages-api-openapi.yml",
+    "telefoon-owned-numbers-api-openapi.yml"
+  ],
+  "outputs": [
+    "telefoon-available-numbers-api-openapi.yml",
+    "telefoon-calls-api-openapi.yml",
+    "telefoon-conferences-api-openapi.yml",
+    "telefoon-messages-api-openapi.yml",
+    "telefoon-owned-numbers-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
