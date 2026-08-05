@@ -13,7 +13,7 @@ categories:
         definition: A telephone call session via EU telephony networks. Can be inbound or outbound.
         tags: [Voice, Core]
       - term: TTS Language
-        definition: Text-to-speech language code for call audio. Supported: nl-NL, fr-BE, de-DE, en-GB.
+        definition: "Text-to-speech language code for call audio. Supported: nl-NL, fr-BE, de-DE, en-GB."
         tags: [Voice]
       - term: IVR
         definition: Interactive Voice Response — automated call flow with multi-language prompts.
