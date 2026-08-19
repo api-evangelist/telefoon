@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Telefoon Number Management Available Numbers API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Available Numbers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Available Numbers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.telefoon.com/v1/numbers/available",
+            "params": [
+              {
+                "name": "country_code",
+                "value": "",
+                "type": "query",
+                "description": "ISO 3166-1 alpha-2 country code (NL, BE, DE, FR, etc.)"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Number type"
+              },
+              {
+                "name": "area_code",
+                "value": "",
+                "type": "query",
+                "description": "Area code / NDC (e.g., 020 for Amsterdam)"
+              },
+              {
+                "name": "sms_enabled",
+                "value": "",
+                "type": "query",
+                "description": "Filter for SMS-capable numbers"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search available phone numbers for European countries."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

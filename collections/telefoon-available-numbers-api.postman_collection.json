@@ -1,0 +1,178 @@
+{
+  "item": [
+    {
+      "id": "aead0f75-56a9-4afb-b40b-a9a0cb77091b",
+      "name": "Available Numbers",
+      "description": {
+        "content": "Search available numbers",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e77ef7af-6b8e-4a30-9ede-797756ecd740",
+          "name": "Search Available Numbers",
+          "request": {
+            "name": "Search Available Numbers",
+            "description": {
+              "content": "Search available phone numbers for European countries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "available"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country_code",
+                  "value": "<string>",
+                  "description": "(Required) ISO 3166-1 alpha-2 country code (NL, BE, DE, FR, etc.)"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Number type"
+                },
+                {
+                  "disabled": false,
+                  "key": "area_code",
+                  "value": "<string>",
+                  "description": "Area code / NDC (e.g., 020 for Amsterdam)"
+                },
+                {
+                  "disabled": false,
+                  "key": "sms_enabled",
+                  "value": "<boolean>",
+                  "description": "Filter for SMS-capable numbers"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a17c2e0c-7381-43d2-a96e-6aa2e8a6b39a",
+              "name": "Available numbers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "country_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "area_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sms_enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"available_numbers\": [\n    {\n      \"phone_number\": \"string\",\n      \"country_code\": \"string\",\n      \"type\": \"premium-rate\",\n      \"friendly_name\": \"string\",\n      \"capabilities\": {\n        \"voice\": true,\n        \"sms\": false\n      },\n      \"monthly_rate\": \"string\",\n      \"address_required\": false\n    },\n    {\n      \"phone_number\": \"string\",\n      \"country_code\": \"string\",\n      \"type\": \"service\",\n      \"friendly_name\": \"string\",\n      \"capabilities\": {\n        \"voice\": true,\n        \"sms\": false\n      },\n      \"monthly_rate\": \"string\",\n      \"address_required\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.telefoon.com/v1/numbers",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3fb379d2-96e9-4f9f-97d4-a810c4beca63",
+    "name": "Telefoon Number Management Available Numbers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Search, purchase, and manage Dutch, Belgian, German, and European phone numbers. Supports local geographic numbers, national numbers, toll-free (0800), premium (0900), and service numbers with full compliance for EU regulatory requirements.\n\nContact Support:\n Name: Telefoon Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "item": [
+    {
+      "id": "c09852fc-86ef-4443-9be3-937d66c2300f",
+      "name": "Conferences",
+      "description": {
+        "content": "Multi-party conferencing",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4a902402-cf4d-48ee-84e9-d8854594e423",
+          "name": "List Conferences",
+          "request": {
+            "name": "List Conferences",
+            "description": {
+              "content": "List conference calls.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conferences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76650e74-93fd-4e14-9825-fc72ecfebec9",
+              "name": "List of conferences",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"conferences\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"completed\",\n      \"friendly_name\": \"string\",\n      \"participant_count\": 8127,\n      \"date_created\": \"2009-02-14T21:51:13.770Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"completed\",\n      \"friendly_name\": \"string\",\n      \"participant_count\": 4632,\n      \"date_created\": \"1983-08-03T23:07:52.003Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45f80282-a27e-40c6-8a66-6b828b73cc6e",
+          "name": "Create Conference",
+          "request": {
+            "name": "Create Conference",
+            "description": {
+              "content": "Create a new conference room.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "conferences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"friendly_name\": \"<string>\",\n  \"max_participants\": 100,\n  \"record\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bfeab69e-5428-44c1-8798-19390605fcb2",
+              "name": "Conference created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "conferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"friendly_name\": \"<string>\",\n  \"max_participants\": 100,\n  \"record\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"completed\",\n  \"friendly_name\": \"string\",\n  \"participant_count\": 9429,\n  \"date_created\": \"1988-06-27T14:03:19.911Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.telefoon.com/v1/numbers",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6a0eadfa-c897-472f-b8ed-c71b9aef7f00",
+    "name": "Telefoon Number Management Available Numbers Conferences API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Search, purchase, and manage Dutch, Belgian, German, and European phone numbers. Supports local geographic numbers, national numbers, toll-free (0800), premium (0900), and service numbers with full compliance for EU regulatory requirements.\n\nContact Support:\n Name: Telefoon Support",
+      "type": "text/plain"
+    }
+  }
+}

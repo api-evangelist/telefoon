@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Telefoon Number Management Available Numbers Owned Numbers API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Owned Numbers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Owned Numbers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.telefoon.com/v1/numbers/owned",
+            "params": [
+              {
+                "name": "country_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter by country"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List phone numbers in your account."
+        },
+        {
+          "info": {
+            "name": "Purchase Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.telefoon.com/v1/numbers/owned",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Purchase a phone number."
+        },
+        {
+          "info": {
+            "name": "Get Owned Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.telefoon.com/v1/numbers/owned/:phone_number",
+            "params": [
+              {
+                "name": "phone_number",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get configuration for a specific number."
+        },
+        {
+          "info": {
+            "name": "Release Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.telefoon.com/v1/numbers/owned/:phone_number",
+            "params": [
+              {
+                "name": "phone_number",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Release a phone number from your account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

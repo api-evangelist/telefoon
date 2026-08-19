@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Telefoon Number Management Available Numbers Conferences API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Conferences",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Conferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.telefoon.com/v1/numbers/conferences"
+          },
+          "docs": "List conference calls."
+        },
+        {
+          "info": {
+            "name": "Create Conference",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.telefoon.com/v1/numbers/conferences",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new conference room."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
