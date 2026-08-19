@@ -5,6 +5,7 @@ description: >-
   with REST APIs to build voice calling, SMS notification, number provisioning, and interactive voice response (IVR)
   solutions. The platform supports Dutch, Belgian, German, and broader European telecommunications infrastructure with
   local number availability and EU data residency.
+specificationVersion: '0.23'
 accessModel:
   pricing: enterprise
   onboarding: self-serve
