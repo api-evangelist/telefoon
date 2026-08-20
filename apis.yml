@@ -109,6 +109,8 @@ apis:
   humanURL: https://developers.telefoon.com/voice
   baseURL: https://api.telefoon.com/v1/voice
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
