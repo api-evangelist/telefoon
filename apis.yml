@@ -162,6 +162,9 @@ apis:
   - type: Documentation
     url: https://developers.telefoon.com/numbers
 common:
+  - type: CapabilityMap
+    url: capabilities/telefoon-capability-edges.yml
+    name: Telefoon Business Capability Map
   - type: AgenticAccess
     url: agentic-access/telefoon-agentic-access.yml
   - type: DomainSecurity

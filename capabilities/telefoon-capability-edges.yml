@@ -1,0 +1,39 @@
+slug: telefoon
+provider: Telefoon
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Owned Numbers
+  spec_file: telefoon-owned-numbers-api-openapi.yml
+  capability_id: BC-2640.30
+  capability_id_l1: BC-2640
+  capability_name: Numbering Resource Management
+  confidence: 0.78
+  evidence: POST /owned purchaseNumber Purchase Number; DELETE /owned/{phone_number} releaseNumber Release
+    Number; 'Search, purchase, and manage Dutch, Belgian, German, and European phone numbers ... local
+    geographic numbers, national numbers, toll-free (0800), premium (0900)'
+  reason: Operations acquire, list and release telephone numbers from a regulated numbering pool, which
+    is stewardship and assignment of numbering resources (BC-2640.30). Slight ambiguity as the vendor
+    is a reseller rather than the regulator-licensed operator, hence 0.78.
+- tag: Available Numbers
+  spec_file: telefoon-available-numbers-api-openapi.yml
+  capability_id: BC-2640.30
+  capability_id_l1: BC-2640
+  capability_name: Numbering Resource Management
+  confidence: 0.7
+  evidence: GET /available searchAvailableNumbers Search Available Numbers; "Search, purchase, and manage
+    Dutch, Belgian, German, and European phone numbers ... toll-free (0800), premium (0900), and service
+    numbers"
+  reason: 'Searching the pool of assignable telephone numbers by type and country is part of numbering
+    resource stewardship and assignment. Confidence moderate: the tag exposes only a search operation,
+    so the stewardship reading rests largely on the document description.'
