@@ -1,10 +1,10 @@
 name: Telefoon
-description: >-
-  Telefoon is a cloud telephony and communications platform offering programmable voice, SMS, and number management APIs
-  tailored for European markets. Built for GDPR compliance and EU regulatory requirements, Telefoon provides developers
-  with REST APIs to build voice calling, SMS notification, number provisioning, and interactive voice response (IVR)
-  solutions. The platform supports Dutch, Belgian, German, and broader European telecommunications infrastructure with
-  local number availability and EU data residency.
+description: Telefoon is a cloud telephony and communications platform offering programmable voice, SMS,
+  and number management APIs tailored for European markets. Built for GDPR compliance and EU regulatory
+  requirements, Telefoon provides developers with REST APIs to build voice calling, SMS notification,
+  number provisioning, and interactive voice response (IVR) solutions. The platform supports Dutch, Belgian,
+  German, and broader European telecommunications infrastructure with local number availability and EU
+  data residency.
 deliveryModel:
   model: saas
   open_source: false
@@ -36,19 +36,19 @@ image: https://www.telefoon.com/logo.png
 url: https://www.telefoon.com
 type: Index
 tags:
-  - Belgium
-  - CPaaS
-  - EU Data Residency
-  - Europe
-  - GDPR Compliant
-  - Messaging
-  - Netherlands
-  - Number Provisioning
-  - SMS
-  - Telephony
-  - Voice
+- Belgium
+- CPaaS
+- EU Data Residency
+- Europe
+- GDPR Compliant
+- Messaging
+- Netherlands
+- Number Provisioning
+- SMS
+- Telephony
+- Voice
 created: '2024-01-01'
-modified: '2026-05-19'
+modified: '2026-09-16'
 apis:
 - aid: telefoon:telefoon-available-numbers-api
   name: Telefoon Available Numbers API
@@ -163,36 +163,38 @@ apis:
   - type: Documentation
     url: https://developers.telefoon.com/numbers
 common:
-  - type: CapabilityMap
-    url: capabilities/telefoon-capability-edges.yml
-    name: Telefoon Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/telefoon-agentic-access.yml
-  - type: DomainSecurity
-    url: security/telefoon-domain-security.yml
-  - type: Authentication
-    url: authentication/telefoon-authentication.yml
-  - type: Authentication
-    url: https://developers.telefoon.com/authentication
-  - type: GettingStarted
-    url: https://developers.telefoon.com/getting-started
-  - type: RateLimits
-    url: https://developers.telefoon.com/rate-limits
-  - type: GDPR
-    url: https://www.telefoon.com/gdpr
-  - type: StatusPage
-    url: https://status.telefoon.com
-  - type: TermsOfService
-    url: https://www.telefoon.com/terms
-  - type: PrivacyPolicy
-    url: https://www.telefoon.com/privacy
-  - type: Pricing
-    url: https://www.telefoon.com/pricing
-  - type: Support
-    url: https://www.telefoon.com/support
-  - type: Blog
-    url: https://blog.telefoon.com
+- type: Website
+  url: https://telefoon.com
+- type: CapabilityMap
+  url: capabilities/telefoon-capability-edges.yml
+  name: Telefoon Business Capability Map
+- type: AgenticAccess
+  url: agentic-access/telefoon-agentic-access.yml
+- type: DomainSecurity
+  url: security/telefoon-domain-security.yml
+- type: Authentication
+  url: authentication/telefoon-authentication.yml
+- type: Authentication
+  url: https://developers.telefoon.com/authentication
+- type: GettingStarted
+  url: https://developers.telefoon.com/getting-started
+- type: RateLimits
+  url: https://developers.telefoon.com/rate-limits
+- type: GDPR
+  url: https://www.telefoon.com/gdpr
+- type: StatusPage
+  url: https://status.telefoon.com
+- type: TermsOfService
+  url: https://www.telefoon.com/terms
+- type: PrivacyPolicy
+  url: https://www.telefoon.com/privacy
+- type: Pricing
+  url: https://www.telefoon.com/pricing
+- type: Support
+  url: https://www.telefoon.com/support
+- type: Blog
+  url: https://blog.telefoon.com
 maintainers:
-  - name: Telefoon API Team
-    email: api-team@telefoon.com
-    url: https://www.telefoon.com/about/api-team
+- name: Telefoon API Team
+  email: api-team@telefoon.com
+  url: https://www.telefoon.com/about/api-team
