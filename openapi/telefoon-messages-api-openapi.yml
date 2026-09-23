@@ -1,15 +1,15 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Telefoon Number Management Available Numbers Messages API
-  description: Search, purchase, and manage Dutch, Belgian, German, and European phone numbers. Supports local geographic numbers, national numbers, toll-free (0800), premium (0900), and service numbers with full compliance for EU regulatory requirements.
+  title: Telefoon SMS Messages API
+  description: GDPR-compliant SMS API for European markets. Send A2P SMS with branded sender IDs, receive inbound messages, track delivery reports, and maintain GDPR audit logs.
   version: v1
   contact:
     name: Telefoon Support
     url: https://www.telefoon.com/support
   termsOfService: https://www.telefoon.com/terms
 servers:
-- url: https://api.telefoon.com/v1/numbers
-  description: Telefoon Number Management API
+- url: https://api.telefoon.com/v1/sms
+  description: Telefoon SMS API (EU data center)
 security:
 - ApiKeyAuth: []
 tags:

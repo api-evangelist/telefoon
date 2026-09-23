@@ -1,22 +1,32 @@
 {
   "provider": "telefoon",
   "sources": [
-    "telefoon-available-numbers-api-openapi.yml",
-    "telefoon-calls-api-openapi.yml",
-    "telefoon-conferences-api-openapi.yml",
-    "telefoon-messages-api-openapi.yml",
-    "telefoon-owned-numbers-api-openapi.yml"
+    "_original/telefoon-numbers-openapi.yml",
+    "_original/telefoon-sms-openapi.yml",
+    "_original/telefoon-voice-openapi.yml"
   ],
   "outputs": [
     "telefoon-available-numbers-api-openapi.yml",
-    "telefoon-calls-api-openapi.yml",
-    "telefoon-conferences-api-openapi.yml",
+    "telefoon-owned-numbers-api-openapi.yml",
     "telefoon-messages-api-openapi.yml",
-    "telefoon-owned-numbers-api-openapi.yml"
+    "telefoon-calls-api-openapi.yml",
+    "telefoon-conferences-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "telefoon-numbers-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "telefoon-sms-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "telefoon-voice-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "telefoon-available-numbers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "telefoon-calls-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "telefoon-conferences-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "telefoon-messages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "telefoon-owned-numbers-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

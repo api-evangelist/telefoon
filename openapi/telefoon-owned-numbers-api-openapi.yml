@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Telefoon Number Management Available Numbers Owned Numbers API
+  title: Telefoon Number Management Owned Numbers API
   description: Search, purchase, and manage Dutch, Belgian, German, and European phone numbers. Supports local geographic numbers, national numbers, toll-free (0800), premium (0900), and service numbers with full compliance for EU regulatory requirements.
   version: v1
   contact:
