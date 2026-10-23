@@ -163,6 +163,8 @@ apis:
   - type: Documentation
     url: https://developers.telefoon.com/numbers
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/telefoon/overview
 - type: Website
   url: https://telefoon.com
 - type: CapabilityMap
